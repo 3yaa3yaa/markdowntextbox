@@ -6,7 +6,7 @@ class MarkdownTextBox extends Component{
   {
     super(props);
     this.descriptionref=React.createRef();
-    this.textarearef=React.createRef();
+    if(this.props.ref==null){this.textarearef=React.createRef();}else{this.textarearef=this.props.ref;};
     this.state={markdownvalue: this.getInitialValue(), focus:true};
     if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
   }
@@ -43,9 +43,9 @@ class MarkdownTextBox extends Component{
   {
       if(this.props.style==null)
       {
-          return {position:"relative",
-              width:"200px",
-              height:"50px"};
+          return {position:"static",
+              width:"100%",
+              height:"100%"};
       }else
       {
           return this.props.style;
@@ -57,7 +57,7 @@ class MarkdownTextBox extends Component{
   {
     let display="block";
     if(this.state.focus){display="none"};
-    return {position:"relative",
+    return {position:"static",
             display: display,
             width: "100%",
             height: "100%"
@@ -68,7 +68,7 @@ class MarkdownTextBox extends Component{
   {
     let display="none";
     if(this.state.focus){display="block"};
-    return {position:"relative",
+    return {position:"static",
             display: display,
             width: "100%",
             height: "100%"
