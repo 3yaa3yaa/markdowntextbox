@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './MarkdownTextBox.css';
+import Compiler from '3jsc';
 
 class MarkdownTextBox extends Component{
   constructor(props)
@@ -8,8 +9,9 @@ class MarkdownTextBox extends Component{
     super(props);
     this.descriptionref=React.createRef();
     this.textarearef=React.createRef();
-    this.state={markdownvalue:"", focus:true}
-  }
+    this.state={markdownvalue:"", focus:true};
+    this.compiler=new Compiler();
+    }
 
   onChangeHandler(e)
   {
@@ -55,13 +57,23 @@ class MarkdownTextBox extends Component{
             }
   }
 
+  getCalculatedText(text)
+  {
+      let re = new RegExp(/#(.*)#/);
+      let matches=re.exec(text);
+      if(matches != null)
+          {return text.replace(re, this.compiler.calc(matches[1]))}
+      else
+          {return text}
+  }
+
   render()
   {
     return (
         <div style={this.getTopLevelStyle()}>
           <div style={this.getDescriptionStyle()}
                onClick={e=>this.onFocusHandler(e)}
-               ref={e=>{this.descriptionref=e}}>{this.state.markdownvalue} </div>
+               ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
           <textarea style={this.getTextAreaStyle()}
                     onChange={e=>{this.onChangeHandler(e)}}
                     onBlur={e=>{this.onBlurHandler(e)}}
