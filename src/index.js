@@ -81,8 +81,10 @@ class MarkdownTextBox extends Component{
     if(this.state.focus){display="none"};
     return {position:"static",
             display: display,
+            wordWrap:"break-word",
             width: "100%",
-            height: "100%"
+            height: "100%",
+            minHeight:"20px"
           }
   }
 
@@ -90,18 +92,22 @@ class MarkdownTextBox extends Component{
   {
     let display="none";
     if(this.state.focus){display="block"};
+    let height=this.textarearef.offsetHeight;
+    if(this.textarearef.scrollHeight>height){height=this.textarearef.scrollHeight};
     return {position:"static",
             display: display,
             backgroundColor:"transparent",
             width: "100%",
-            height: "100%",
-            resize:"none"
+            height: height,
+            resize:"none",
+            minHeight:"20px",
+            boxSizing:"border-box"
             }
   }
 
   getCalculatedText(text)
   {
-      let re = new RegExp(/\$\(([^$()]*)\)/g);
+      let re = new RegExp(/\=([^ ]+)( |$)/g);
       return text.replace(re,(match, capture)=>{return this.compiler.calc(capture)})
   }
 
