@@ -7,23 +7,25 @@ class MarkdownTextBox extends Component{
     super(props);
     this.descriptionref=React.createRef();
     this.textarearef=React.createRef();
-    this.state={markdownvalue: this.getInitialValue(), focus:true};
+    //this.state={markdownvalue: this.getInitialValue(), focus:false};
+    this.state={markdownvalue: this.getInitialValue()};
     if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
   }
 
   componentDidMount() {
-      if(this.props.focus)
-      {
-          this.setState({state:true})
-      }
-      else
-      {
-          this.setState({state:false})
-      }
+      // if(this.props.focus)
+      // {
+      //     this.setState({state:true})
+      // }
+      // else
+      // {
+      //     this.setState({state:false})
+      // }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-      if(this.state)
+      //if(this.state)
+      if(this.props.focus)
       {
           this.textarearef.focus();
       }
@@ -53,11 +55,11 @@ class MarkdownTextBox extends Component{
 
   onBlurHandler(e)
   {
-    this.setState({focus:false})
+    //this.setState({focus:false})
   }
   onFocusHandler(e)
   {
-    this.setState({focus:true})
+    //this.setState({focus:true})
   }
 
 
@@ -78,7 +80,7 @@ class MarkdownTextBox extends Component{
   getDescriptionStyle()
   {
     let display="block";
-    if(this.state.focus){display="none"};
+    if(this.props.focus){display="none"};
     return {position:"static",
             display: display,
             wordWrap:"break-word",
@@ -91,12 +93,12 @@ class MarkdownTextBox extends Component{
   getTextAreaStyle()
   {
     let display="none";
-    if(this.state.focus){display="block"};
+    if(this.props.focus){display="block"};
     let height=this.textarearef.offsetHeight;
     if(this.textarearef.scrollHeight>height){height=this.textarearef.scrollHeight};
     return {position:"static",
             display: display,
-            backgroundColor:"transparent",
+            backgroundColor:"lightgray",
             width: "100%",
             height: height,
             resize:"none",
