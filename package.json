@@ -1,6 +1,7 @@
 {
   "name": "@3yaa3yaa/markdowntextbox",
   "version": "0.1.2",
+  "license": "MIT",
   "main": "build/index.js",
   "repository": {
     "type": "git",

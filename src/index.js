@@ -66,11 +66,14 @@ class MarkdownTextBox extends Component{
   {
     let display="block";
     if(this.props.focus){display="none"};
+    let color="black";
+    if(this.props.descriptionColor!=undefined){color=this.props.descriptionColor};
     return {position:"static",
             display: display,
+            color: color,
             wordWrap:"break-word",
             minWidth: "100px",
-            maxWidth: "300px",
+            maxWidth: "200px",
             //height: this.state.height,
             minHeight:"20px"
           }
@@ -80,12 +83,18 @@ class MarkdownTextBox extends Component{
   {
     let display="none";
     if(this.props.focus){display="block"};
-    //if(this.props.width!=undefined){width=this.props.width}else{width="300px"};
+      let color="black";
+      if(this.props.textBoxColor!=undefined){color=this.props.textBoxColor};
+
+      //if(this.props.width!=undefined){width=this.props.width}else{width="300px"};
     return {position:"static",
             display: display,
-            backgroundColor:"lightgray",
-            width: "400px",
-            height: "700px",
+            color: color,
+            outline:"none",
+            border: "0px",
+            backgroundColor:"transparent",
+            width: "200px",
+            height: "175px",
             resize:"none",
             minHeight:"30px",
             minWidth: "100px",
@@ -114,13 +123,10 @@ class MarkdownTextBox extends Component{
     return (
         <div style={this.getTopLevelStyle()}>
           <div style={this.getDescriptionStyle()}
-               onClick={e=>this.onFocusHandler(e)}
                ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
           <textarea style={this.getTextAreaStyle()}
                     onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
                     onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
-                    onBlur={e=>{this.onBlurHandler(e)}}
-                    onFocus={e=>{this.onFocusHandler(e)}}
                     value={this.state.markdownvalue}
                     ref={e=>{this.textarearef=e}}></textarea>
         </div>
