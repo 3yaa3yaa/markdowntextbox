@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Compiler from '3jsc';
+import Compiler from '@3yaa3yaa/3jsc';
 
 class MarkdownTextBox extends Component{
   constructor(props)
@@ -8,29 +8,23 @@ class MarkdownTextBox extends Component{
     this.descriptionref=React.createRef();
     this.textarearef=React.createRef();
     //this.state={markdownvalue: this.getInitialValue(), focus:false};
-    this.state={markdownvalue: this.getInitialValue()};
+    this.state={markdownvalue: this.getInitialValue(), width: "", height:""};
     if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
-  }
-
-  componentDidMount() {
-      // if(this.props.focus)
-      // {
-      //     this.setState({state:true})
-      // }
-      // else
-      // {
-      //     this.setState({state:false})
-      // }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
       //if(this.state)
       if(this.props.focus)
       {
+          // let height=this.textarearef.offsetHeight;
+          // if(this.textarearef.scrollHeight>height){height=(parseInt(this.textarearef.scrollHeight) + 30) + "px" };
+          // let width="300px";
+          // this.setState({width: width, height: height });
           this.textarearef.focus();
       }
       else
       {
+          //this.setState({width: "100%", height: "100%" });
           this.textarearef.blur();
       }
   }
@@ -53,23 +47,14 @@ class MarkdownTextBox extends Component{
     this.setState({markdownvalue:e.target.value})
   }
 
-  onBlurHandler(e)
-  {
-    //this.setState({focus:false})
-  }
-  onFocusHandler(e)
-  {
-    //this.setState({focus:true})
-  }
-
-
   getTopLevelStyle()
   {
       if(this.props.style==null)
       {
           return {position:"static",
-              width:"100%",
-              height:"100%"};
+          //    width:this.state.width,
+          //    height:this.state.height
+          };
       }else
       {
           return this.props.style;
@@ -84,8 +69,9 @@ class MarkdownTextBox extends Component{
     return {position:"static",
             display: display,
             wordWrap:"break-word",
-            width: "100%",
-            height: "100%",
+            minWidth: "100px",
+            maxWidth: "300px",
+            //height: this.state.height,
             minHeight:"20px"
           }
   }
@@ -94,15 +80,17 @@ class MarkdownTextBox extends Component{
   {
     let display="none";
     if(this.props.focus){display="block"};
-    let height=this.textarearef.offsetHeight;
-    if(this.textarearef.scrollHeight>height){height=this.textarearef.scrollHeight};
+    //if(this.props.width!=undefined){width=this.props.width}else{width="300px"};
     return {position:"static",
             display: display,
             backgroundColor:"lightgray",
-            width: "100%",
-            height: height,
+            width: "400px",
+            height: "700px",
             resize:"none",
-            minHeight:"20px",
+            minHeight:"30px",
+            minWidth: "100px",
+            margin:"1px",
+            padding:"1px",
             boxSizing:"border-box"
             }
   }
