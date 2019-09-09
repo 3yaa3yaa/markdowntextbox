@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 import Compiler from '@3yaa3yaa/3jsc';
+import React, {Component} from 'react';
 
 class MarkdownTextBox extends Component{
   constructor(props)
@@ -104,10 +104,28 @@ class MarkdownTextBox extends Component{
             }
   }
 
+  calc(data)
+  {
+      if(this.props.calc==undefined)
+      {
+          return this.compiler.calc(data);
+      }
+      else
+      {
+          return this.safeExec(this.props.calc(data));
+      }
+  }
+
   getCalculatedText(text)
   {
       let re = new RegExp(/\=([^ ]+)( |$)/g);
-      return text.replace(re,(match, capture)=>{return this.compiler.calc(capture)})
+      return text.replace(re,(match, capture)=>{return this.calc(capture)})
+  }
+
+  getDescriptionText(text)
+  {
+      let tokenized = this.compiler.tokenize(text);
+
   }
 
   safeExec(callback,e)
