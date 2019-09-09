@@ -139,10 +139,11 @@ class MarkdownTextBox extends Component{
   render()
   {
     return (
-        <div style={this.getTopLevelStyle()}>
-          <div style={this.getDescriptionStyle()}
+        <div className="top" style={this.getTopLevelStyle()}>
+          <div className="description" style={this.getDescriptionStyle()}
                ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
-          <textarea style={this.getTextAreaStyle()}
+          <textarea className="text"
+                    style={this.getTextAreaStyle()}
                     onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
                     onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
                     value={this.state.markdownvalue}

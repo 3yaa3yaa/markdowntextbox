@@ -3,11 +3,19 @@ import { shallow, mount, render } from 'enzyme';
 import MarkdownTextBox from "../src/index";
 
 describe('A suite', function() {
-    it('should have two div', function(){
+    it('should have full elements', function(){
         const wrapper = shallow(<MarkdownTextBox />);
-        expect(wrapper.find('div').length).toBe(2);
+        expect(wrapper.find('.description').length).toBe(1);
+        expect(wrapper.find('.top').length).toBe(1);
+        expect(wrapper.find('.text').length).toBe(1);
     })
 
+
+    it('should have proper description', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar ");
+    })
 
     // it('should render without throwing an error', function() {
     //     expect(shallow(<MarkdownTextBox focus={false} />).contains(<div></div>)).toBe(true);
