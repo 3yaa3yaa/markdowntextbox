@@ -3,10 +3,16 @@ import { shallow, mount, render } from 'enzyme';
 import MarkdownTextBox from "../src/index";
 
 describe('A suite', function() {
-    it('should render without throwing an error', function() {
-        expect(shallow(<MarkdownTextBox />).contains(<div></div>)).toBe(true);
-    });
+    it('should have two div', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        expect(wrapper.find('div').length).toBe(2);
+    })
 
+
+    // it('should render without throwing an error', function() {
+    //     expect(shallow(<MarkdownTextBox focus={false} />).contains(<div></div>)).toBe(true);
+    // });
+    //
     // it('should be selectable by class "foo"', function() {
     //     expect(shallow(<MarkdownTextBox />).is('.foo')).toBe(true);
     // });
