@@ -81,8 +81,8 @@ class MarkdownTextBox extends Component{
 
   getTextAreaStyle()
   {
-    let display="none";
-    if(this.props.focus){display="block"};
+      let display="none";
+      if(this.props.focus){display="block"};
       let color="black";
       if(this.props.textBoxColor!=undefined){color=this.props.textBoxColor};
 
@@ -136,18 +136,29 @@ class MarkdownTextBox extends Component{
       }
   }
 
+  getDescription()
+  {
+          return <div className="description" style={this.getDescriptionStyle()}
+                      ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
+
+  }
+  getTextArea()
+  {
+
+          return <textarea className="text"
+                           style={this.getTextAreaStyle()}
+                           onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
+                           onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
+                           value={this.state.markdownvalue}
+                           ref={e=>{this.textarearef=e}}></textarea>
+  }
+
   render()
   {
     return (
         <div className="top" style={this.getTopLevelStyle()}>
-          <div className="description" style={this.getDescriptionStyle()}
-               ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
-          <textarea className="text"
-                    style={this.getTextAreaStyle()}
-                    onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
-                    onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
-                    value={this.state.markdownvalue}
-                    ref={e=>{this.textarearef=e}}></textarea>
+            {this.getDescription()}
+            {this.getTextArea()}
         </div>
     );
   }
