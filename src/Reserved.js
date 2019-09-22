@@ -6,29 +6,34 @@ import Compiler from "@3yaa3yaa/3jsc";
 {
     constructor(keyword, stopword, behaviour)
     {
-        this.keyword=keyword;
-        this.stopword=stopword;
-        this.behaviour=behaviour;
+        this.keyword　=　keyword;
+        this.stopword　=　stopword;
+        this.behaviour　=　behaviour;
     }
 
 }
 
 export default class ReservedList
 {
-    constructor()
+    constructor(customReservedItems)
     {
-        this.items=[]
+        let arr=[];
         //this.compiler=new Compiler();
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
-        this.items.push(new Reserved('#'," ", (node)=>{return this.getTagJSX(node)}))
-        this.items.push(new Reserved('*',"*", (node)=>{return this.getBoldJSX(node)}))
-        this.items.push(new Reserved('`',"`", (node)=>{return this.getCodeJSX(node)}))
-        this.items.push(new Reserved('h1.',"\n", (node)=>{return this.getHeaderJSX(node,1)}))
-        this.items.push(new Reserved('h2.',"\n", (node)=>{return this.getHeaderJSX(node,2)}))
-        this.items.push(new Reserved('h3.',"\n", (node)=>{return this.getHeaderJSX(node,3)}))
-        this.items.push(new Reserved('h4.',"\n", (node)=>{return this.getHeaderJSX(node,4)}))
-        this.items.push(new Reserved('h5.',"\n", (node)=>{return this.getHeaderJSX(node,5)}))
-        this.items.push(new Reserved('h6.',"\n", (node)=>{return this.getHeaderJSX(node,6)}))
+        arr.push(new Reserved('#'," ", (node)=>{return this.getTagJSX(node)}))
+        arr.push(new Reserved('*',"*", (node)=>{return this.getBoldJSX(node)}))
+        arr.push(new Reserved('`',"`", (node)=>{return this.getCodeJSX(node)}))
+        arr.push(new Reserved('h1.',"\n", (node)=>{return this.getHeaderJSX(node,1)}))
+        arr.push(new Reserved('h2.',"\n", (node)=>{return this.getHeaderJSX(node,2)}))
+        arr.push(new Reserved('h3.',"\n", (node)=>{return this.getHeaderJSX(node,3)}))
+        arr.push(new Reserved('h4.',"\n", (node)=>{return this.getHeaderJSX(node,4)}))
+        arr.push(new Reserved('h5.',"\n", (node)=>{return this.getHeaderJSX(node,5)}))
+        arr.push(new Reserved('h6.',"\n", (node)=>{return this.getHeaderJSX(node,6)}))
+        if(Array.isArray(customReservedItems))
+        {
+            arr=arr.concat(customReservedItems);
+        }
+        this.items=arr;
     }
 
     getKeywords()

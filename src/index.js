@@ -9,7 +9,7 @@ class MarkdownTextBox extends Component{
     super(props);
     this.descriptionref=React.createRef();
     this.textarearef=React.createRef();
-    this.reservedList=new ReservedList();
+    this.reservedList=new ReservedList(this.props.reservedItems);
     //this.state={markdownvalue: this.getInitialValue(), focus:false};
     this.state={markdownvalue: this.getInitialValue(), width: "", height:""};
     //if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
@@ -150,8 +150,10 @@ class MarkdownTextBox extends Component{
                                        value={this.state.markdownvalue}
                                        ref={e=>{this.textarearef=e}}></textarea>
                       <div style={{fontSize:"75%",color:"#666666"}}>&#x1F9D0; Tips
-                          <br /> keywords:{this.reservedList.getKeywords().map((item)=>{return item + " "})}
-                          <br /> Keyboard: ENTER, TAB, DEL, Arrow
+                          <br /> keywords:
+                          <br />   {this.reservedList.items.map((item)=>{return item.keyword+ item.stopword + " "})}
+                          <br /> Keyboard:
+                          <br />   ENTER, TAB, DEL, Arrow
                       </div>
                   </div>
   }
