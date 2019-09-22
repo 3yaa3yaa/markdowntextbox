@@ -1,5 +1,7 @@
 import Compiler from '@3yaa3yaa/3jsc';
 import React, {Component} from 'react';
+import TextIterator from "./TextIterator";
+import ReservedList from "./Reserved";
 
 class MarkdownTextBox extends Component{
   constructor(props)
@@ -7,9 +9,10 @@ class MarkdownTextBox extends Component{
     super(props);
     this.descriptionref=React.createRef();
     this.textarearef=React.createRef();
+    this.reservedList=new ReservedList();
     //this.state={markdownvalue: this.getInitialValue(), focus:false};
     this.state={markdownvalue: this.getInitialValue(), width: "", height:""};
-    if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
+    //if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -71,6 +74,7 @@ class MarkdownTextBox extends Component{
     return {position:"static",
             display: display,
             color: color,
+            whiteSpace:"pre-wrap",
             wordWrap:"break-word",
             minWidth: "100px",
             maxWidth: "200px",
@@ -79,16 +83,26 @@ class MarkdownTextBox extends Component{
           }
   }
 
-  getTextAreaStyle()
+  getEditorStyle()
   {
       let display="none";
       if(this.props.focus){display="block"};
+      return {
+          display: display,
+      }
+
+  }
+
+  getTextAreaStyle()
+  {
+      // let display="none";
+      // if(this.props.focus){display="block"};
       let color="black";
       if(this.props.textBoxColor!=undefined){color=this.props.textBoxColor};
 
       //if(this.props.width!=undefined){width=this.props.width}else{width="300px"};
     return {position:"static",
-            display: display,
+            //display: display,
             color: color,
             outline:"none",
             border: "0px",
@@ -104,28 +118,10 @@ class MarkdownTextBox extends Component{
             }
   }
 
-  calc(data)
-  {
-      if(this.props.calc==undefined)
-      {
-          return this.compiler.calc(data);
-      }
-      else
-      {
-          return this.safeExec(this.props.calc(data));
-      }
-  }
-
-  getCalculatedText(text)
-  {
-      let re = new RegExp(/\=([^ ]+)( |$)/g);
-      return text.replace(re,(match, capture)=>{return this.calc(capture)})
-  }
-
   getDescriptionText(text)
   {
-      let tokenized = this.compiler.tokenize(text);
-
+      let ti=new TextIterator(text, this.reservedList);
+      return ti.getALLJSX();
   }
 
   safeExec(callback,e)
@@ -139,18 +135,25 @@ class MarkdownTextBox extends Component{
   getDescription()
   {
           return <div className="description" style={this.getDescriptionStyle()}
-                      ref={e=>{this.descriptionref=e}}>{this.getCalculatedText(this.state.markdownvalue)} </div>
+                      ref={e=>{this.descriptionref=e}}>{
+                          this.getDescriptionText(this.state.markdownvalue)
+                      }</div>
 
   }
   getTextArea()
   {
-
-          return <textarea className="text"
-                           style={this.getTextAreaStyle()}
-                           onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
-                           onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
-                           value={this.state.markdownvalue}
-                           ref={e=>{this.textarearef=e}}></textarea>
+          return <div style={this.getEditorStyle()}>
+                      <textarea className="text"
+                                       style={this.getTextAreaStyle()}
+                                       onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
+                                       onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
+                                       value={this.state.markdownvalue}
+                                       ref={e=>{this.textarearef=e}}></textarea>
+                      <div style={{fontSize:"75%",color:"#666666"}}>&#x1F9D0; Tips
+                          <br /> keywords:{this.reservedList.getKeywords().map((item)=>{return item + " "})}
+                          <br /> Keyboard: ENTER, TAB, DEL, Arrow
+                      </div>
+                  </div>
   }
 
   render()

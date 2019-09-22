@@ -10,12 +10,24 @@ describe('A suite', function() {
         expect(wrapper.find('.text').length).toBe(1);
     })
 
-
     it('should have proper description', function(){
         const wrapper = shallow(<MarkdownTextBox />);
         wrapper.setState({markdownvalue:"foobar"});
-        expect(wrapper.find('.description').text()).toBe("foobar ");
+        expect(wrapper.find('.description').text()).toBe("foobar");
     })
+
+    // it('should calculate properly', function(){
+    //     const wrapper = shallow(<MarkdownTextBox />);
+    //     wrapper.setState({markdownvalue:"=1+2*3"});
+    //     expect(wrapper.find('.description').text()).toBe("7");
+    //     wrapper.setState({markdownvalue:"=2+2*3"});
+    //     expect(wrapper.find('.description').text()).toBe("8");
+    //     wrapper.setState({markdownvalue:"=1+2*5+(3+5)"});
+    //     expect(wrapper.find('.description').text()).toBe("19");
+    //     wrapper.setState({markdownvalue:"=1"});
+    //     expect(wrapper.find('.description').text()).toBe("1");
+    // })
+
 
     // it('should render without throwing an error', function() {
     //     expect(shallow(<MarkdownTextBox focus={false} />).contains(<div></div>)).toBe(true);
