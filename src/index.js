@@ -149,11 +149,9 @@ class MarkdownTextBox extends Component{
                                        onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
                                        value={this.state.markdownvalue}
                                        ref={e=>{this.textarearef=e}}></textarea>
-                      <div style={{fontSize:"75%",color:"#666666"}}>&#x1F9D0; Tips
+                      <div style={{fontSize:"75%",color:"#666666", whiteSpace:"pre-wrap", width:"200px"}}>&#x1F9D0; Tips
                           <br /> keywords:
-                          <br />   {this.reservedList.items.map((item)=>{return item.keyword+ item.stopword + " "})}
-                          <br /> Keyboard:
-                          <br />   ENTER, TAB, DEL, Arrow
+                          <br />   {this.reservedList.items.map((item)=>{return (item.keyword+ item.stopword + " ").replace("\n"," ")})}
                       </div>
                   </div>
   }
