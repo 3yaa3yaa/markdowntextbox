@@ -1,5 +1,5 @@
 import React from "react";
-import Compiler from "@3yaa3yaa/3jsc";
+//import Compiler from "@3yaa3yaa/3jsc";
 
  class Reserved
 {

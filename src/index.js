@@ -1,4 +1,4 @@
-import Compiler from '@3yaa3yaa/3jsc';
+//import Compiler from '@3yaa3yaa/3jsc';
 import React, {Component} from 'react';
 import TextIterator from "./TextIterator";
 import ReservedList from "./Reserved";
