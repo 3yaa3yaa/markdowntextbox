@@ -20,7 +20,7 @@ export default class ReservedList
         let arr=[];
         //this.compiler=new Compiler();
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
-        arr.push(new Reserved('#'," ", (node)=>{return this.getTagJSX(node)},"label"))
+        arr.push(new Reserved('#'," ", (node)=>{return this.getTagJSX(node)},"label(:value)"))
         arr.push(new Reserved('*',"*", (node)=>{return this.getBoldJSX(node)},"bold"))
         arr.push(new Reserved('`',"`", (node)=>{return this.getCodeJSX(node)},"code"))
         arr.push(new Reserved('h1.',"\n", (node)=>{return this.getHeaderJSX(node,1)},"header"))
