@@ -12,6 +12,7 @@ class MarkdownTextBox extends Component{
     this.reservedList=new ReservedList(this.props.reservedItems);
     //this.state={markdownvalue: this.getInitialValue(), focus:false};
     this.state={markdownvalue: this.getInitialValue(), width: "", height:""};
+    this.textAreaStyle=this.props.textAreaStyle;
     //if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
   }
 
@@ -95,27 +96,29 @@ class MarkdownTextBox extends Component{
 
   getTextAreaStyle()
   {
-      // let display="none";
-      // if(this.props.focus){display="block"};
-      let color="black";
-      if(this.props.textBoxColor!=undefined){color=this.props.textBoxColor};
+      let style={position:"static",
+          //display: display,
+          color: "black",
+          outline:"none",
+          border: "0px",
+          backgroundColor:"transparent",
+          width: "200px",
+          height: "175px",
+          resize:"none",
+          minHeight:"30px",
+          minWidth: "100px",
+          margin:"1px",
+          padding:"1px",
+          boxSizing:"border-box"
+      }
+      if(this.textAreaStyle!=undefined){
+          style=Object.assign(style, this.textAreaStyle)
+      }
+      return style;
+
 
       //if(this.props.width!=undefined){width=this.props.width}else{width="300px"};
-    return {position:"static",
-            //display: display,
-            color: color,
-            outline:"none",
-            border: "0px",
-            backgroundColor:"transparent",
-            width: "200px",
-            height: "175px",
-            resize:"none",
-            minHeight:"30px",
-            minWidth: "100px",
-            margin:"1px",
-            padding:"1px",
-            boxSizing:"border-box"
-            }
+    return
   }
 
   getDescriptionText(text)
