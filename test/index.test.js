@@ -16,6 +16,7 @@ describe('A suite', function() {
         expect(wrapper.find('.description').text()).toBe("foobar");
     })
 
+
     // it('should calculate properly', function(){
     //     const wrapper = shallow(<MarkdownTextBox />);
     //     wrapper.setState({markdownvalue:"=1+2*3"});

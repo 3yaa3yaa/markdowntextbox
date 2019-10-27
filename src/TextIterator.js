@@ -57,6 +57,13 @@ export default class TextIterator{
     {
         return this.items.map((item)=>{return item.value});
     }
+
+
+    getItemModes()
+    {
+        return this.items.map((item)=>{return item.mode});
+    }
+
     tokenize()
     {
         let index=0;
@@ -76,7 +83,18 @@ export default class TextIterator{
                 else
                 {
                     index=index+mode.keyword.length;
-                    this.items.push(new Item(mode, ""));
+                    if(this.items.length>0 &&
+                        (this.items[this.items.length-1].value===""
+                            || this.items[this.items.length-1].value==="\n"
+                            || this.items[this.items.length-1].value==="\r"
+                            || this.items[this.items.length-1].value==="\r\n"))
+                    {
+                        this.items[this.items.length-1].mode=mode;
+                    }
+                    else
+                    {
+                        this.items.push(new Item(mode, ""));
+                    }
                 }
             }
             else
