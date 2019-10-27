@@ -1,7 +1,7 @@
 import React from "react";
 //import Compiler from "@3yaa3yaa/3jsc";
 
- class Reserved
+export class Reserved
 {
     constructor(keyword, stopwords, behaviour, description)
     {
@@ -12,7 +12,7 @@ import React from "react";
     }
 }
 
-export default class ReservedList
+export class ReservedList
 {
     constructor(customReservedItems, language)
     {

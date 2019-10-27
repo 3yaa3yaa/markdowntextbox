@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import MarkdownTextBox from "../src/index";
+import { MarkdownTextBox } from "../src/index";
 
 describe('A suite', function() {
     it('should have full elements', function(){

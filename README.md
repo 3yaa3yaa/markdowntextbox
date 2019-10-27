@@ -1,11 +1,11 @@
 # MarkdownTextBox
 This is a react component of markdown text box.
-
+This software is released under the MIT License, see LICENSE.txt.
 
 ## How to use
 ```$xslt
 
-import MarkdownTextBox from '@3yaa3yaa/markdowntextbox';
+import { MarkdownTextBox } from '@3yaa3yaa/markdowntextbox';
 ...
 render()
 {
@@ -34,6 +34,10 @@ Create an array of objects that has following elements and pass it to `<MarkDown
     }
 }
 ```
+You can get the above class by importing this library as below.
+```$xslt
+import { Reserved } from '@3yaa3yaa/markdowntextbox'
+```
 For example,
 * keyword : `#`
 * stopwords : `["", "\n"]`
@@ -45,7 +49,6 @@ Then you will get "aaa **bbb** ccc"
 ## Available Scripts
 
 In the project directory, you can run:
-
 
 ### `npm test`
 

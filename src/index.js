@@ -1,9 +1,10 @@
 //import Compiler from '@3yaa3yaa/3jsc';
 import React, {Component} from 'react';
 import TextIterator from "./TextIterator";
-import ReservedList from "./Reserved";
+import {Reserved, ReservedList} from "./Reserved";
 
-class MarkdownTextBox extends Component{
+export {Reserved};
+export class MarkdownTextBox extends Component{
   constructor(props)
   {
     super(props);
@@ -173,5 +174,3 @@ class MarkdownTextBox extends Component{
   }
 
 }
-
-export default MarkdownTextBox;

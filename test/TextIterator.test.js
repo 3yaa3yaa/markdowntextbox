@@ -1,6 +1,6 @@
 import React from 'react';
 import TextIterator from "../src/TextIterator";
-import ReservedList from "../src/Reserved";
+import { ReservedList } from "../src/Reserved";
 
 describe('A suite', function() {
     it('should tokenize properly', function(){

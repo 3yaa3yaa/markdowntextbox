@@ -1,5 +1,5 @@
 import React from 'react';
-import ReservedList from "../src/Reserved";
+import { ReservedList } from "../src/Reserved";
 
 describe('A suite', function() {
     it('should display codelines beautifully', function(){
