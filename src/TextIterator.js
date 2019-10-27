@@ -99,15 +99,15 @@ export default class TextIterator{
 
     startsFromStopWord(text,mode)
     {
-        let regexp = new RegExp('^'+ mode.stopword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
-        if (text.match(regexp)!=undefined)
+        for(let stopword of mode.stopwords)
         {
-            return mode.stopword;
+            let regexp = new RegExp('^'+ stopword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
+            if (text.match(regexp)!=undefined)
+            {
+                return stopword;
+            }
         }
-        else
-        {
-            return "";
-        }
+        return "";
     }
 
     startsFromReserved(text)

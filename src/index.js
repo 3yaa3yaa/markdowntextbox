@@ -154,7 +154,10 @@ class MarkdownTextBox extends Component{
                                        value={this.state.markdownvalue}
                                        ref={e=>{this.textarearef=e}}></textarea>
                       <div style={{fontSize:"75%",color:"#666666", whiteSpace:"pre-wrap", width:"200px"}}>&#x1F9D0; Tips
-                          <br />{this.reservedList.items.map((item)=>{return (item.keyword+ item.description + item.stopword + " ").replace("\n"," ")})}
+                          <br />{this.reservedList.items.map(
+                              (item)=>{
+                                  return (item.keyword+ item.description + item.stopwords.reduce((acc,cur)=>{return acc+"|"+cur}) + " ").replace("\n"," ")}
+                              )}
                       </div>
                   </div>
   }

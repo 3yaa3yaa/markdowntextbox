@@ -3,14 +3,13 @@ import React from "react";
 
  class Reserved
 {
-    constructor(keyword, stopword, behaviour, description)
+    constructor(keyword, stopwords, behaviour, description)
     {
         this.keyword　=　keyword;
-        this.stopword　=　stopword;
+        this.stopwords　=　stopwords;
         this.behaviour　=　behaviour;
         this.description = description;
     }
-
 }
 
 export default class ReservedList
@@ -20,15 +19,14 @@ export default class ReservedList
         let arr=[];
         //this.compiler=new Compiler();
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
-        arr.push(new Reserved('#'," ", (node)=>{return this.getTagJSX(node)},"label(:value)"))
-        arr.push(new Reserved('*',"*", (node)=>{return this.getBoldJSX(node)},"bold"))
-        arr.push(new Reserved('`',"`", (node)=>{return this.getCodeJSX(node)},"code"))
-        arr.push(new Reserved('h1.',"\n", (node)=>{return this.getHeaderJSX(node,1)},"header"))
-        arr.push(new Reserved('h2.',"\n", (node)=>{return this.getHeaderJSX(node,2)},"header"))
-        arr.push(new Reserved('h3.',"\n", (node)=>{return this.getHeaderJSX(node,3)},"header"))
-        arr.push(new Reserved('h4.',"\n", (node)=>{return this.getHeaderJSX(node,4)},"header"))
-        arr.push(new Reserved('h5.',"\n", (node)=>{return this.getHeaderJSX(node,5)},"header"))
-        arr.push(new Reserved('h6.',"\n", (node)=>{return this.getHeaderJSX(node,6)},"header"))
+        arr.push(new Reserved('*',["*"], (node)=>{return this.getBoldJSX(node)},"bold"))
+        arr.push(new Reserved('`',["`"], (node)=>{return this.getCodeJSX(node)},"code"))
+        arr.push(new Reserved('h1.',["\n"], (node)=>{return this.getHeaderJSX(node,1)},"header"))
+        arr.push(new Reserved('h2.',["\n"], (node)=>{return this.getHeaderJSX(node,2)},"header"))
+        arr.push(new Reserved('h3.',["\n"], (node)=>{return this.getHeaderJSX(node,3)},"header"))
+        arr.push(new Reserved('h4.',["\n"], (node)=>{return this.getHeaderJSX(node,4)},"header"))
+        arr.push(new Reserved('h5.',["\n"], (node)=>{return this.getHeaderJSX(node,5)},"header"))
+        arr.push(new Reserved('h6.',["\n"], (node)=>{return this.getHeaderJSX(node,6)},"header"))
         if(Array.isArray(customReservedItems))
         {
             arr=arr.concat(customReservedItems);
@@ -120,31 +118,6 @@ export default class ReservedList
         }
     }
 
-
-    getTagJSX(text)
-    {
-        return <div style={this.getTagStyle()}>{text}</div>;
-    }
-
-    getTagStyle()
-    {
-        return {
-            display:"inline",
-            textAlign: "justify",
-            verticalAlign:"middle",
-            backgroundColor: "#FFDDFF",
-            fontsize:"8px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            borderBottomLeftRadius:"20px",
-            borderTopLeftRadius:"20px",
-            borderBottomRightRadius:"20px",
-            borderTopRightRadius:"20px",
-            width: "50px",
-            height: "10px",
-            color: "#FF00FF"
-        }
-    }
 
 
 }

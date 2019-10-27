@@ -4,20 +4,23 @@ import ReservedList from "../src/Reserved";
 
 describe('A suite', function() {
     it('should tokenize properly', function(){
-        let ti= new TextIterator("aaa", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("aaa", rl)
         expect(ti.getItemValues()).toStrictEqual(["aaa"]);
         expect(ti.items[0].mode).toBeNull();
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("aaa#bbb", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("aaa#bbb", rl)
         expect(ti.getItemValues()).toStrictEqual(["aaa","bbb"]);
         expect(ti.items[0].mode).toBeNull();
         expect(ti.items[1].mode.keyword).toStrictEqual("#");
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("aaa#bbb ccc", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("aaa#bbb ccc", rl)
         expect(ti.getItemValues()).toStrictEqual(["aaa","bbb","ccc"]);
         expect(ti.items[0].mode).toBeNull();
         expect(ti.items[1].mode.keyword).toStrictEqual("#");
@@ -25,7 +28,8 @@ describe('A suite', function() {
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("aaa #bbb ccc", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("aaa #bbb ccc", rl)
         expect(ti.getItemValues()).toStrictEqual(["aaa ","bbb","ccc"]);
          expect(ti.items[0].mode).toBeNull();
         expect(ti.items[1].mode.keyword).toStrictEqual("#");
@@ -33,25 +37,31 @@ describe('A suite', function() {
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("h1. aaa", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("h1. aaa",rl)
         expect(ti.getItemValues()).toStrictEqual([ " aaa"]);
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("h1. aaa #bbb", new ReservedList())
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("h1. aaa #bbb", rl)
         expect(ti.getItemValues()).toStrictEqual([ " aaa #bbb"]);
     })
 
     it('should tokenize properly', function(){
-        let ti= new TextIterator("h1. aaa #bbb\nccc", new ReservedList())
+
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
+        let ti= new TextIterator("h1. aaa #bbb\nccc", rl)
         expect(ti.getItemValues()).toStrictEqual([ " aaa #bbb","ccc"]);
         expect(ti.items[0].mode.keyword).toStrictEqual("h1.");
         expect(ti.items[1].mode).toBeNull();
     })
 
     it('should handle stopword properly', function(){
+
+        let rl=new ReservedList([{keyword: "#", stopwords: [" ","\n"]}])
         let ti= new TextIterator("")
-        expect(ti.startsFromStopWord(" aaa",{stopword:" "})).toStrictEqual(" ");
+        expect(ti.startsFromStopWord(" aaa",{stopwords:[" "]})).toStrictEqual(" ");
     })
 
 });
