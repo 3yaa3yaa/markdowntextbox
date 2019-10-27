@@ -90,6 +90,7 @@ export default class TextIterator{
                             || this.items[this.items.length-1].value==="\r\n"))
                     {
                         this.items[this.items.length-1].mode=mode;
+                        this.items[this.items.length-1].value="";
                     }
                     else
                     {
