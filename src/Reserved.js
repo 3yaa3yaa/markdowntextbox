@@ -21,12 +21,12 @@ export class ReservedList
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
         arr.push(new Reserved('*',["*"], (node)=>{return this.getBoldJSX(node)},"bold"))
         arr.push(new Reserved('`',["`"], (node)=>{return this.getCodeJSX(node)},"code"))
-        arr.push(new Reserved('h1.',["\n"], (node)=>{return this.getHeaderJSX(node,1)},"header"))
-        arr.push(new Reserved('h2.',["\n"], (node)=>{return this.getHeaderJSX(node,2)},"header"))
-        arr.push(new Reserved('h3.',["\n"], (node)=>{return this.getHeaderJSX(node,3)},"header"))
-        arr.push(new Reserved('h4.',["\n"], (node)=>{return this.getHeaderJSX(node,4)},"header"))
-        arr.push(new Reserved('h5.',["\n"], (node)=>{return this.getHeaderJSX(node,5)},"header"))
-        arr.push(new Reserved('h6.',["\n"], (node)=>{return this.getHeaderJSX(node,6)},"header"))
+        arr.push(new Reserved('h1.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,1)},"header"))
+        arr.push(new Reserved('h2.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,2)},"header"))
+        arr.push(new Reserved('h3.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,3)},"header"))
+        arr.push(new Reserved('h4.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,4)},"header"))
+        arr.push(new Reserved('h5.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,5)},"header"))
+        arr.push(new Reserved('h6.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,6)},"header"))
         if(Array.isArray(customReservedItems))
         {
             arr=arr.concat(customReservedItems);
