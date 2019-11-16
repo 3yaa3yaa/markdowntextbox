@@ -15,7 +15,7 @@ class Item{
         }
         else
         {
-            return this.mode.behaviour(this.value);
+            return this.mode.behaviour(this.value,index);
         }
     }
 }
