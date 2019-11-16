@@ -14,6 +14,7 @@ export class MarkdownTextBox extends Component{
     //this.state={markdownvalue: this.getInitialValue(), focus:false};
     this.state={markdownvalue: this.getInitialValue(), width: "", height:""};
     this.textAreaStyle=this.props.textAreaStyle;
+    this.descriptionStyle=this.props.descriptionStyle;
     //if(this.props.compiler==null){this.compiler=new Compiler()}else{this.compiler=this.props.compiler}
   }
 
@@ -72,17 +73,22 @@ export class MarkdownTextBox extends Component{
     let display="block";
     if(this.props.focus){display="none"};
     let color="black";
-    if(this.props.descriptionColor!=undefined){color=this.props.descriptionColor};
-    return {position:"static",
-            display: display,
-            color: color,
-            whiteSpace:"pre-wrap",
-            wordWrap:"break-word",
-            minWidth: "100px",
-            maxWidth: "200px",
-            //height: this.state.height,
-            minHeight:"20px"
-          }
+
+    let style={position:"static",
+        display: display,
+        color: color,
+        whiteSpace:"pre-wrap",
+        wordWrap:"break-word",
+        minWidth: "100px",
+        maxWidth: "200px",
+        //height: this.state.height,
+        minHeight:"20px"
+    }
+
+    if(this.descriptionStyle!=undefined){
+        style=Object.assign(style, this.descriptionStyle)
+    }
+    return style;
   }
 
   getEditorStyle()

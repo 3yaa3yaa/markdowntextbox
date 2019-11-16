@@ -7,11 +7,11 @@ class Item{
         this.value=value;
     }
 
-    getJSX()
+    getJSX(index)
     {
         if(this.mode===null)
         {
-            return  <div style={{display:"inline"}}>{this.value}</div>;
+            return  <div key={index} style={{display:"inline"}}>{this.value}</div>;
         }
         else
         {
@@ -45,7 +45,7 @@ export default class TextIterator{
 
     getALLJSX()
     {
-        return this.items.map((item)=>{return item.getJSX()})
+        return this.items.map((item,index)=>{return item.getJSX(index)})
     }
 
     getCurrent()
