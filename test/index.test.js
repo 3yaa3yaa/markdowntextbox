@@ -17,32 +17,49 @@ describe('A suite', function() {
     })
 
 
-    // it('should calculate properly', function(){
-    //     const wrapper = shallow(<MarkdownTextBox />);
-    //     wrapper.setState({markdownvalue:"=1+2*3"});
-    //     expect(wrapper.find('.description').text()).toBe("7");
-    //     wrapper.setState({markdownvalue:"=2+2*3"});
-    //     expect(wrapper.find('.description').text()).toBe("8");
-    //     wrapper.setState({markdownvalue:"=1+2*5+(3+5)"});
-    //     expect(wrapper.find('.description').text()).toBe("19");
-    //     wrapper.setState({markdownvalue:"=1"});
-    //     expect(wrapper.find('.description').text()).toBe("1");
-    // })
+    it('should renders h1 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h1.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
+    it('should renders h2 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h2.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
 
 
-    // it('should render without throwing an error', function() {
-    //     expect(shallow(<MarkdownTextBox focus={false} />).contains(<div></div>)).toBe(true);
-    // });
-    //
-    // it('should be selectable by class "foo"', function() {
-    //     expect(shallow(<MarkdownTextBox />).is('.foo')).toBe(true);
-    // });
-    //
-    // it('should mount in a full DOM', function() {
-    //     expect(mount(<MarkdownTextBox />).find('.foo').length).toBe(1);
-    // });
-    //
-    // it('should render to static HTML', function() {
-    //     expect(render(<MarkdownTextBox />).text()).toEqual('Bar');
-    // });
+    it('should renders h3 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h3.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
+
+    it('should renders h4 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h4.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
+    it('should renders h5 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h5.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
+    it('should renders h6 properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"h6.foobar"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
+
+    it('should renders bold properly', function(){
+        const wrapper = shallow(<MarkdownTextBox />);
+        wrapper.setState({markdownvalue:"*foobar*"});
+        expect(wrapper.find('.description').text()).toBe("foobar");
+    })
+
 });

@@ -19,14 +19,14 @@ export class ReservedList
         let arr=[];
         //this.compiler=new Compiler();
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
-        arr.push(new Reserved('*',["*"], (node)=>{return this.getBoldJSX(node)},"bold"))
-        arr.push(new Reserved('`',["`"], (node)=>{return this.getCodeJSX(node)},"code"))
-        arr.push(new Reserved('h1.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,1)},"header"))
-        arr.push(new Reserved('h2.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,2)},"header"))
-        arr.push(new Reserved('h3.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,3)},"header"))
-        arr.push(new Reserved('h4.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,4)},"header"))
-        arr.push(new Reserved('h5.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,5)},"header"))
-        arr.push(new Reserved('h6.',["\n","\r\n","\r"], (node)=>{return this.getHeaderJSX(node,6)},"header"))
+        arr.push(new Reserved('*',["*"], (node,index)=>{return this.getBoldJSX(node,index)},"bold"))
+        arr.push(new Reserved('`',["`"], (node,index)=>{return this.getCodeJSX(node,index)},"code"))
+        arr.push(new Reserved('h1.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,1,index)},"header"))
+        arr.push(new Reserved('h2.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,2,index)},"header"))
+        arr.push(new Reserved('h3.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,3,index)},"header"))
+        arr.push(new Reserved('h4.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,4,index)},"header"))
+        arr.push(new Reserved('h5.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,5,index)},"header"))
+        arr.push(new Reserved('h6.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,6,index)},"header"))
         if(Array.isArray(customReservedItems))
         {
             arr=arr.concat(customReservedItems);
@@ -54,14 +54,14 @@ export class ReservedList
 
 
 
-    getJSX(text)
+    getJSX(text,index)
     {
-        return <div style={{display:"inline"}}>{text}</div>;
+        return <div  key={index} style={{display:"inline"}}>{text}</div>;
     }
 
-    getCodeJSX(text)
+    getCodeJSX(text,index)
     {
-        return <div style={{display:"block",
+        return <div key={index} style={{display:"block",
                             fontSize:"80%",
                             fontFamilly:"monospace",
                             backgroundColor:"#EEEEEE"
@@ -85,9 +85,9 @@ export class ReservedList
 
     }
 
-    getBoldJSX(text)
+    getBoldJSX(text,index)
     {
-        return <div style={{display:"inline",fontWeight:"bold"}}>{text}</div>;
+        return <div  key={index} style={{display:"inline",fontWeight:"bold"}}>{text}</div>;
     }
 
 
@@ -98,23 +98,23 @@ export class ReservedList
         }
     }
 
-    getHeaderJSX(text, level)
+    getHeaderJSX(text, level,index)
     {
         switch (level) {
             case 1:
-                return <h1 style={{margin:"0px"}}>{text}</h1>;
+                return <h1 key={index} style={{margin:"0px"}}>{text}</h1>;
             case 2:
-                return <h2 style={{margin:"0px"}}>{text}</h2>;
+                return <h2 key={index} style={{margin:"0px"}}>{text}</h2>;
             case 3:
-                return <h3 style={{margin:"0px"}}>{text}</h3>;
+                return <h3 key={index} style={{margin:"0px"}}>{text}</h3>;
             case 4:
-                return <h4 style={{margin:"0px"}}>{text}</h4>;
+                return <h4 key={index} style={{margin:"0px"}}>{text}</h4>;
             case 5:
-                return <h5 style={{margin:"0px"}}>{text}</h5>;
+                return <h5 key={index} style={{margin:"0px"}}>{text}</h5>;
             case 6:
-                return <h6 style={{margin:"0px"}}>{text}</h6>;
+                return <h6 key={index} style={{margin:"0px"}}>{text}</h6>;
             default:
-                return <h1 style={{margin:"0px"}}>{text}</h1>;
+                return <h1 key={index} style={{margin:"0px"}}>{text}</h1>;
         }
     }
 

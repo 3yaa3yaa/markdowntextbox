@@ -7,15 +7,15 @@ class Item{
         this.value=value;
     }
 
-    getJSX()
+    getJSX(index)
     {
         if(this.mode===null)
         {
-            return  <div style={{display:"inline"}}>{this.value}</div>;
+            return  <div key={index} style={{display:"inline"}}>{this.value}</div>;
         }
         else
         {
-            return this.mode.behaviour(this.value);
+            return this.mode.behaviour(this.value,index);
         }
     }
 }
@@ -45,7 +45,7 @@ export default class TextIterator{
 
     getALLJSX()
     {
-        return this.items.map((item)=>{return item.getJSX()})
+        return this.items.map((item,index)=>{return item.getJSX(index)})
     }
 
     getCurrent()
@@ -90,6 +90,7 @@ export default class TextIterator{
                             || this.items[this.items.length-1].value==="\r\n"))
                     {
                         this.items[this.items.length-1].mode=mode;
+                        this.items[this.items.length-1].value="";
                     }
                     else
                     {
