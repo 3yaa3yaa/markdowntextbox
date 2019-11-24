@@ -79,8 +79,6 @@ export class MarkdownTextBox extends Component{
         color: color,
         whiteSpace:"pre-wrap",
         wordWrap:"break-word",
-        minWidth: "100px",
-        maxWidth: "200px",
         //height: this.state.height,
         minHeight:"20px"
     }
