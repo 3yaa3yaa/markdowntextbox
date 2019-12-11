@@ -61,29 +61,50 @@ export class ReservedList
 
     getCodeJSX(text,index)
     {
-        return <div key={index} style={{display:"block",
-                            fontSize:"80%",
-                            fontFamilly:"monospace",
-                            backgroundColor:"#EEEEEE"
-                            }}>{this.getCodeLines(text)}</div>;
+        return <div key={index}>{this.getCodeLines(text)}</div>;
     }
 
     getCodeLines(text)
     {
         let arr=text.split("\n");
-        let out="";
-        let linenum=0;
-        for(let line of arr)
-        {
-            if(line.length>0)
-            {
-                linenum=linenum+1;
-                out= out+ ('0000000'+linenum).slice((Math.floor(arr.length/10)+1)*(-1)) + "> " + line + "\n"
-            }
-        }
-        return out;
+        let body = arr.map((line,index)=>{return <div key={"bodyline-"+ index} style={this.getCodeLineStyle()}>{line}</div>});
+        let linenums =  arr.map((line, index)=>{return <div key={"linenumber-"+ index} style={this.getLineNumberStyle()}>{index+1}</div>});
 
+        let out=<div style={{width:"100%",position:"relative"}}>
+            <div style={{position:"absolute", left:"0px",width:"30px", minWidth:"30px",backgroundColor:"#555555"}}>{linenums}</div>
+            <div style={{position:"absolute",left:"30px",right:"10px",overflowX:"auto",backgroundColor:"#555555"}}>{body}</div>
+        </div>
+        return out;
     }
+
+    getBaseCodeLineStyle()
+    {
+        return {display:"block",
+            height:"25px",
+            fontFamily:"Consolas, \"Courier New\", monospace",
+            width:"90%",
+            color:"#FFFFEE",
+            backgroundColor:"inherit",
+            fontSize:"100%",
+            margin:"0px",
+            whiteSpace:"nowrap"}
+    }
+
+    getCodeLineStyle()
+    {
+        let out=this.getBaseCodeLineStyle();
+        out.paddingRight="10px";
+        return out;
+    }
+
+
+    getLineNumberStyle()
+    {
+        let out=this.getCodeLineStyle();
+        return out;
+    }
+
+
 
     getBoldJSX(text,index)
     {

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import TextIterator from "./TextIterator";
 import {Reserved, ReservedList} from "./Reserved";
 
+
 export {Reserved};
 export class MarkdownTextBox extends Component{
   constructor(props)
@@ -22,15 +23,10 @@ export class MarkdownTextBox extends Component{
       //if(this.state)
       if(this.props.focus)
       {
-          // let height=this.textarearef.offsetHeight;
-          // if(this.textarearef.scrollHeight>height){height=(parseInt(this.textarearef.scrollHeight) + 30) + "px" };
-          // let width="300px";
-          // this.setState({width: width, height: height });
           this.textarearef.focus();
       }
       else
       {
-          //this.setState({width: "100%", height: "100%" });
           this.textarearef.blur();
       }
   }
@@ -57,10 +53,7 @@ export class MarkdownTextBox extends Component{
   {
       if(this.props.style==null)
       {
-          return {position:"static",
-          //    width:this.state.width,
-          //    height:this.state.height
-          };
+          return {position:"static"};
       }else
       {
           return this.props.style;
