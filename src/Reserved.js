@@ -20,7 +20,7 @@ export class ReservedList
         //this.compiler=new Compiler();
         //this.items.push(new Reserved('=', (node)=>{return this.getJSX(this.compiler.calc(node))},false, " "))
         arr.push(new Reserved('*',["*"], (node,index)=>{return this.getBoldJSX(node,index)},"bold"))
-        arr.push(new Reserved('`',["`"], (node,index)=>{return this.getCodeJSX(node,index)},"code"))
+        arr.push(new Reserved('```',["```"], (node,index)=>{return this.getCodeJSX(node,index)},"code"))
         arr.push(new Reserved('h1.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,1,index)},"header"))
         arr.push(new Reserved('h2.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,2,index)},"header"))
         arr.push(new Reserved('h3.',["\n","\r\n","\r"], (node,index)=>{return this.getHeaderJSX(node,3,index)},"header"))
@@ -67,10 +67,12 @@ export class ReservedList
     getCodeLines(text)
     {
         let arr=text.split("\n");
+        arr=arr.filter((val,index)=>!((val==="") && (index===0 || index===arr.length-1)));
+        let boxheight = 25 * arr.length + 20;
         let body = arr.map((line,index)=>{return <div key={"bodyline-"+ index} style={this.getCodeLineStyle()}>{line}</div>});
         let linenums =  arr.map((line, index)=>{return <div key={"linenumber-"+ index} style={this.getLineNumberStyle()}>{index+1}</div>});
 
-        let out=<div style={{width:"100%",position:"relative"}}>
+        let out=<div style={{width:"100%",height:boxheight+"px", position:"relative"}}>
             <div style={{position:"absolute", left:"0px",width:"30px", minWidth:"30px",backgroundColor:"#555555"}}>{linenums}</div>
             <div style={{position:"absolute",left:"30px",right:"10px",overflowX:"auto",backgroundColor:"#555555"}}>{body}</div>
         </div>
@@ -87,7 +89,7 @@ export class ReservedList
             backgroundColor:"inherit",
             fontSize:"100%",
             margin:"0px",
-            whiteSpace:"nowrap"}
+            whiteSpace:"pre"}
     }
 
     getCodeLineStyle()
@@ -101,6 +103,8 @@ export class ReservedList
     getLineNumberStyle()
     {
         let out=this.getCodeLineStyle();
+        out.userSelect="none";
+        out.WebkitUserSelect="none";
         return out;
     }
 
