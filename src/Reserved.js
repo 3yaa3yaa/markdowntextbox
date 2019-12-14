@@ -72,8 +72,8 @@ export class ReservedList
         let body = arr.map((line,index)=>{return <div key={"bodyline-"+ index} style={this.getCodeLineStyle()}>{line}</div>});
         let linenums =  arr.map((line, index)=>{return <div key={"linenumber-"+ index} style={this.getLineNumberStyle()}>{index+1}</div>});
 
-        let out=<div style={{width:"100%", minWidth:"200px", height:boxheight+"px", position:"relative"}}>
-            <div style={{position:"absolute", left:"0px",width:"30px", minWidth:"30px",backgroundColor:"#777777"}}>{linenums}</div>
+        let out=<div style={{width:"100%", minWidth:"200px", marginTop:'10px', height:boxheight+"px", position:"relative"}}>
+            <div style={{position:"absolute", left:"0px",width:"30px", minWidth:"30px", textAlign:"center",backgroundColor:"#888888"}}>{linenums}</div>
             <div style={{position:"absolute",left:"30px",right:"10px", paddingLeft:"10px", overflowX:"auto",backgroundColor:"#999999"}}>{body}</div>
         </div>
         return out;
