@@ -149,6 +149,7 @@ export class MarkdownTextBox extends Component{
                                        style={this.getTextAreaStyle()}
                                        onKeyDown={e=>{this.safeExec(this.props.onKeyDown,e)}}
                                        onChange={e=>{this.onChangeHandler(e);this.safeExec(this.props.onChange,e)}}
+                                       onBlur={e=>{this.safeExec(this.props.onBlur,e)}}
                                        value={this.state.markdownvalue}
                                        ref={e=>{this.textarearef=e}}></textarea>
               <div style={{fontSize:"75%",color:"#666666", whiteSpace:"pre-wrap", width:"200px"}}>&#x1F9D0; Tips
